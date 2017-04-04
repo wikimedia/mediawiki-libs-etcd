@@ -22,7 +22,12 @@
 		"ext-curl" : "*"
 	},
 	"require-dev" : {
+		"mediawiki/mediawiki-codesniffer": "0.7.2",
 		"phpunit/phpunit": "~5.0"
+	},
+	"scripts": {
+		"test": "phpcs -p -s",
+		"fix": "phpcbf"
 	},
 	"autoload": {
 		"psr-4": {

@@ -9,15 +9,15 @@ use ActiveCollab\Etcd\Client;
  */
 class VersionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers LinkORB\Component\Etcd\Client::doRequest
-     */
-    public function testGetVersion()
-    {
-        $version = (new Client())->geVersion();
+	/**
+	 * @covers LinkORB\Component\Etcd\Client::doRequest
+	 */
+	public function testGetVersion() {
 
-        $this->assertInternalType('array', $version);
-        $this->assertArrayHasKey('etcdserver', $version);
-        $this->assertArrayHasKey('etcdcluster', $version);
-    }
+		$version = ( new Client() )->geVersion();
+
+		$this->assertInternalType( 'array', $version );
+		$this->assertArrayHasKey( 'etcdserver', $version );
+		$this->assertArrayHasKey( 'etcdcluster', $version );
+	}
 }
