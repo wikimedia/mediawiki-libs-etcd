@@ -22,7 +22,10 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSetServer() {
 
-		$this->assertEquals( 'http://localhost:4001', ( new Client() )->setServer( 'http://localhost:4001/' )->getServer() );
+		$this->assertEquals(
+			'http://localhost:4001',
+				( new Client() )->setServer( 'http://localhost:4001/' )->getServer()
+		);
 	}
 
 	/**
@@ -68,7 +71,10 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCustomCaFileCanBeSet() {
 
-		$this->assertEquals( __FILE__, ( new Client() )->verifySslPeer( true, __FILE__ )->getCustomCaFile() );
+		$this->assertEquals(
+			__FILE__,
+				( new Client() )->verifySslPeer( true, __FILE__ )->getCustomCaFile()
+		);
 	}
 
 	/**
@@ -95,7 +101,10 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( '/root', ( new Client() )->setSandboxPath( 'root' )->getSandboxPath() );
 		$this->assertEquals( '/root', ( new Client() )->setSandboxPath( 'root/' )->getSandboxPath() );
 		$this->assertEquals( '/root', ( new Client() )->setSandboxPath( '/root/' )->getSandboxPath() );
-		$this->assertEquals( '/a/bit/deeper/path', ( new Client() )->setSandboxPath( '/a/bit/deeper/path/' )->getSandboxPath() );
+		$this->assertEquals(
+			'/a/bit/deeper/path',
+				( new Client() )->setSandboxPath( '/a/bit/deeper/path/' )->getSandboxPath()
+		);
 	}
 
 	/**
@@ -120,7 +129,9 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	public function testApiVersionIsUsedInKeyPath() {
 
 		$this->assertEquals( '/v2/keys/path/to/key', ( new Client() )->getKeyPath( 'path/to/key' ) );
-		$this->assertEquals( '/v7/keys/path/to/key', ( new Client() )->setApiVersion( 'v7' )->getKeyPath( 'path/to/key' ) );
+		$this->assertEquals(
+			'/v7/keys/path/to/key', ( new Client() )->setApiVersion( 'v7' )->getKeyPath( 'path/to/key' )
+		);
 	}
 
 	/**
@@ -129,7 +140,10 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	public function testSandboxPathIsUsedInKeyPath() {
 
 		$this->assertEquals( '/v2/keys/path/to/key', ( new Client() )->getKeyPath( 'path/to/key' ) );
-		$this->assertEquals( '/v2/keys/root/is/cool/path/to/key', ( new Client() )->setSandboxPath( 'root/is/cool' )->getKeyPath( 'path/to/key' ) );
+		$this->assertEquals(
+			'/v2/keys/root/is/cool/path/to/key',
+				( new Client() )->setSandboxPath( 'root/is/cool' )->getKeyPath( 'path/to/key' )
+		);
 	}
 
 	/**
@@ -137,9 +151,12 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetKeyUrl() {
 
-		$clinet = ( new Client( 'http://localhost:4001', 'v7' ) )->setSandboxPath( 'awesome/root' );
-		$this->assertInstanceOf( Client::class, $clinet );
+		$client = ( new Client( 'http://localhost:4001', 'v7' ) )->setSandboxPath( 'awesome/root' );
+		$this->assertInstanceOf( Client::class, $client );
 
-		$this->assertEquals( 'http://localhost:4001/v7/keys/awesome/root/path/to/key', $clinet->getKeyUrl( 'path/to/key' ) );
+		$this->assertEquals(
+			'http://localhost:4001/v7/keys/awesome/root/path/to/key',
+			$client->getKeyUrl( 'path/to/key' )
+		);
 	}
 }
