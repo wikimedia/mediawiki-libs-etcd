@@ -1,0 +1,33 @@
+{
+	"name" : "wikimedia/etcd",
+	"description": "PHP client for etcd, a distributed configuration system",
+	"license" : "GPL-2.0+",
+	"keywords": [ "etcd", "client", "configuration" ],
+	"homepage": "https://www.mediawiki.org/wiki/etcd",
+	"authors": [
+		{
+			"name" : "Cong Peijun",
+			"email" : "p.cong@linkorb.com"
+		},
+		{
+			"name": "Ilija Studen",
+			"email": "ilija.studen@activecollab.com"
+		},
+		{
+			"name": "Kunal Mehta"
+		}
+	],
+	"require" : {
+		"php": ">=5.5.9",
+		"ext-curl" : "*"
+	},
+	"require-dev" : {
+		"phpunit/phpunit": "~5.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"ActiveCollab\\Etcd\\": "src",
+			"ActiveCollab\\Etcd\\Test\\": "test/src"
+		}
+	}
+}
