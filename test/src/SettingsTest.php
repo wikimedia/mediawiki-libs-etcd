@@ -14,7 +14,7 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testDefaultServer() {
 
-		$this->assertEquals( 'http://127.0.0.1:4001', ( new Client() )->getServer() );
+		$this->assertEquals( 'http://127.0.0.1:2379', ( new Client() )->getServer() );
 	}
 
 	/**
@@ -23,8 +23,8 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	public function testSetServer() {
 
 		$this->assertEquals(
-			'http://localhost:4001',
-				( new Client() )->setServer( 'http://localhost:4001/' )->getServer()
+			'http://localhost:2379',
+				( new Client() )->setServer( 'http://localhost:2379/' )->getServer()
 		);
 	}
 
@@ -45,8 +45,8 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 		$is_https_property = $reflection->getProperty( 'is_https' );
 		$is_https_property->setAccessible( true );
 
-		$this->assertFalse( $is_https_property->getValue( new Client( 'http://127.0.0.1:4001' ) ) );
-		$this->assertTrue( $is_https_property->getValue( new Client( 'https://127.0.0.1:4001' ) ) );
+		$this->assertFalse( $is_https_property->getValue( new Client( 'http://127.0.0.1:2379' ) ) );
+		$this->assertTrue( $is_https_property->getValue( new Client( 'https://127.0.0.1:2379' ) ) );
 	}
 
 	/**
@@ -151,11 +151,11 @@ class SettingsTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetKeyUrl() {
 
-		$client = ( new Client( 'http://localhost:4001', 'v7' ) )->setSandboxPath( 'awesome/root' );
+		$client = ( new Client( 'http://localhost:2379', 'v7' ) )->setSandboxPath( 'awesome/root' );
 		$this->assertInstanceOf( Client::class, $client );
 
 		$this->assertEquals(
-			'http://localhost:4001/v7/keys/awesome/root/path/to/key',
+			'http://localhost:2379/v7/keys/awesome/root/path/to/key',
 			$client->getKeyUrl( 'path/to/key' )
 		);
 	}

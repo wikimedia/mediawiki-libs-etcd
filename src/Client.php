@@ -45,7 +45,7 @@ class Client implements ClientInterface {
 	 * @param string $server
 	 * @param string $api_version
 	 */
-	public function __construct( $server = 'http://127.0.0.1:4001', $api_version = 'v2' ) {
+	public function __construct( $server = 'http://127.0.0.1:2379', $api_version = 'v2' ) {
 		$this->setServer( $server );
 		$this->setApiVersion( $api_version );
 	}
