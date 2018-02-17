@@ -7,13 +7,11 @@ use ActiveCollab\Etcd\Client;
 /**
  * @package ActiveCollab\Etcd\Tests\Etcd
  */
-class VersionTest extends \PHPUnit_Framework_TestCase
-{
+class VersionTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @covers LinkORB\Component\Etcd\Client::doRequest
 	 */
 	public function testGetVersion() {
-
 		$version = ( new Client() )->geVersion();
 
 		$this->assertInternalType( 'array', $version );

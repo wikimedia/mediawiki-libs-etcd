@@ -9,15 +9,14 @@ use ActiveCollab\Etcd\Exception\KeyNotFoundException;
 /**
  * @package ActiveCollab\Etcd
  */
-interface ClientInterface
-{
+interface ClientInterface {
 	/**
 	 * @return string
 	 */
 	public function getServer();
 
 	/**
-	 * @param  string $server
+	 * @param string $server
 	 * @return $this
 	 */
 	public function &setServer( $server );
@@ -35,8 +34,8 @@ interface ClientInterface
 	/**
 	 * Configure SSL connection parameters
 	 *
-	 * @param  bool|true   $verify_ssl_peer
-	 * @param  string|null $custom_ca_file
+	 * @param bool|true $verify_ssl_peer
+	 * @param string|null $custom_ca_file
 	 * @return $this
 	 */
 	public function &verifySslPeer( $verify_ssl_peer = true, $custom_ca_file = null );
@@ -47,7 +46,7 @@ interface ClientInterface
 	public function getApiVersion();
 
 	/**
-	 * @param  string $version
+	 * @param string $version
 	 * @return $this
 	 */
 	public function &setApiVersion( $version );
@@ -76,7 +75,7 @@ interface ClientInterface
 	/**
 	 * Build key space operations
 	 *
-	 * @param  string $key
+	 * @param string $key
 	 * @return string
 	 */
 	public function getKeyPath( $key );
@@ -84,7 +83,7 @@ interface ClientInterface
 	/**
 	 * Return full key URI
 	 *
-	 * @param  string $key
+	 * @param string $key
 	 * @return string
 	 */
 	public function getKeyUrl( $key );
@@ -97,7 +96,7 @@ interface ClientInterface
 	/**
 	 * Return true if key exists
 	 *
-	 * @param  string  $key
+	 * @param string $key
 	 * @return boolean
 	 */
 	public function exists( $key );
@@ -105,7 +104,7 @@ interface ClientInterface
 	/**
 	 * Return true if directory exists
 	 *
-	 * @param  string  $key
+	 * @param string $key
 	 * @return boolean
 	 */
 	public function dirExists( $key );
@@ -115,8 +114,8 @@ interface ClientInterface
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @param int    $ttl
-	 * @param array  $condition
+	 * @param int $ttl
+	 * @param array $condition
 	 * @return array
 	 */
 	public function set( $key, $value, $ttl = null, $condition = [] );
@@ -124,8 +123,8 @@ interface ClientInterface
 	/**
 	 * Retrieve the value of a key
 	 *
-	 * @param  string               $key
-	 * @param  array                $flags
+	 * @param string $key
+	 * @param array $flags
 	 * @return array
 	 * @throws KeyNotFoundException
 	 * @throws EtcdException
@@ -136,7 +135,7 @@ interface ClientInterface
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array  $flags the extra query params
+	 * @param array $flags the extra query params
 	 * @return string the value of the key.
 	 * @throws KeyNotFoundException
 	 */
@@ -147,7 +146,7 @@ interface ClientInterface
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @param int    $ttl
+	 * @param int $ttl
 	 * @return array $body
 	 * @throws KeyExistsException
 	 */
@@ -157,7 +156,7 @@ interface ClientInterface
 	 * make a new directory
 	 *
 	 * @param string $key
-	 * @param int    $ttl
+	 * @param int $ttl
 	 * @return array $body
 	 * @throws KeyExistsException
 	 */
@@ -168,8 +167,8 @@ interface ClientInterface
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @param int    $ttl
-	 * @param array  $condition The extra condition for updating
+	 * @param int $ttl
+	 * @param array $condition The extra condition for updating
 	 * @return array $body
 	 * @throws KeyNotFoundException
 	 */
@@ -178,8 +177,8 @@ interface ClientInterface
 	/**
 	 * Update directory
 	 *
-	 * @param  string        $key
-	 * @param  int           $ttl
+	 * @param string $key
+	 * @param int $ttl
 	 * @return array
 	 * @throws EtcdException
 	 */
@@ -197,8 +196,8 @@ interface ClientInterface
 	/**
 	 * Removes the key if it is directory
 	 *
-	 * @param string  $key
-	 * @param boolean $recursive
+	 * @param string $key
+	 * @param bool $recursive
 	 * @return mixed
 	 * @throws EtcdException
 	 */
@@ -207,8 +206,8 @@ interface ClientInterface
 	/**
 	 * Retrieve a directory
 	 *
-	 * @param string  $key
-	 * @param boolean $recursive
+	 * @param string $key
+	 * @param bool $recursive
 	 * @return mixed
 	 * @throws KeyNotFoundException
 	 */
@@ -217,8 +216,8 @@ interface ClientInterface
 	/**
 	 * Retrieve a directories key
 	 *
-	 * @param string  $key
-	 * @param boolean $recursive
+	 * @param string $key
+	 * @param bool $recursive
 	 * @return array
 	 * @throws EtcdException
 	 */
@@ -227,9 +226,9 @@ interface ClientInterface
 	/**
 	 * Get all key-value pair that the key is not directory.
 	 *
-	 * @param  string  $root
-	 * @param  boolean $recursive
-	 * @param  string  $key
+	 * @param string $root
+	 * @param bool $recursive
+	 * @param string $key
 	 * @return array
 	 */
 	public function getKeyValueMap( $root = '/', $recursive = true, $key = null );
@@ -237,7 +236,7 @@ interface ClientInterface
 	/**
 	 * Run a sandboxed set of commands.
 	 *
-	 * @param string   $sandbox_path
+	 * @param string $sandbox_path
 	 * @param callable $callback
 	 */
 	public function sandboxed( $sandbox_path, callable $callback );

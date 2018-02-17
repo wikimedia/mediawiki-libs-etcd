@@ -58,7 +58,7 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * @param  string $server
+	 * @param string $server
 	 * @return $this
 	 */
 	public function &setServer( $server ) {
@@ -93,8 +93,8 @@ class Client implements ClientInterface {
 	/**
 	 * Configure SSL connection parameters
 	 *
-	 * @param  bool|true   $verify_ssl_peer
-	 * @param  string|null $custom_ca_file
+	 * @param bool|true $verify_ssl_peer
+	 * @param string|null $custom_ca_file
 	 * @return $this
 	 */
 	public function &verifySslPeer( $verify_ssl_peer = true, $custom_ca_file = null ) {
@@ -108,7 +108,7 @@ class Client implements ClientInterface {
 			}
 		}
 
-		$this->verify_ssl_peer = (boolean) $verify_ssl_peer;
+		$this->verify_ssl_peer = (bool)$verify_ssl_peer;
 		$this->custom_ca_file = $custom_ca_file;
 
 		return $this;
@@ -122,7 +122,7 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * @param  string $version
+	 * @param string $version
 	 * @return $this
 	 */
 	public function &setApiVersion( $version ) {
@@ -165,7 +165,7 @@ class Client implements ClientInterface {
 	/**
 	 * Build key space operations
 	 *
-	 * @param  string $key
+	 * @param string $key
 	 * @return string
 	 */
 	public function getKeyPath( $key ) {
@@ -179,7 +179,7 @@ class Client implements ClientInterface {
 	/**
 	 * Return full key URI
 	 *
-	 * @param  string $key
+	 * @param string $key
 	 * @return string
 	 */
 	public function getKeyUrl( $key ) {
@@ -194,7 +194,7 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function exists( $key ) {
 		try {
@@ -207,7 +207,7 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function dirExists( $key ) {
 		try {
@@ -218,7 +218,7 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function set( $key, $value, $ttl = null, $condition = [] ) {
 		$data = [ 'value' => $value ];
@@ -234,7 +234,7 @@ class Client implements ClientInterface {
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array  $flags the extra query params
+	 * @param array $flags the extra query params
 	 * @return array
 	 * @throws KeyNotFoundException
 	 * @throws EtcdException
@@ -258,7 +258,7 @@ class Client implements ClientInterface {
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array  $flags the extra query params
+	 * @param array $flags the extra query params
 	 * @return string the value of the key.
 	 * @throws KeyNotFoundException
 	 */
@@ -277,19 +277,19 @@ class Client implements ClientInterface {
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @param int    $ttl
+	 * @param int $ttl
 	 * @return array $body
 	 * @throws KeyExistsException
 	 */
 	public function create( $key, $value, $ttl = 0 ) {
-		return $request = $this->set( $key, $value, $ttl, [ 'prevExist' => 'false' ] );
+		return $this->set( $key, $value, $ttl, [ 'prevExist' => 'false' ] );
 	}
 
 	/**
 	 * make a new directory
 	 *
 	 * @param string $key
-	 * @param int    $ttl
+	 * @param int $ttl
 	 * @return array $body
 	 * @throws KeyExistsException
 	 */
@@ -308,8 +308,8 @@ class Client implements ClientInterface {
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @param int    $ttl
-	 * @param array  $condition The extra condition for updating
+	 * @param int $ttl
+	 * @param array $condition The extra condition for updating
 	 * @return array $body
 	 * @throws KeyNotFoundException
 	 */
@@ -326,8 +326,8 @@ class Client implements ClientInterface {
 	/**
 	 * Update directory
 	 *
-	 * @param  string        $key
-	 * @param  int           $ttl
+	 * @param string $key
+	 * @param int $ttl
 	 * @return array
 	 * @throws EtcdException
 	 */
@@ -336,7 +336,7 @@ class Client implements ClientInterface {
 			throw new EtcdException( 'TTL is required', 204 );
 		}
 
-		return $this->httpPut( $this->getKeyUrl( $key ), [ 'ttl' => (int) $ttl ], [
+		return $this->httpPut( $this->getKeyUrl( $key ), [ 'ttl' => (int)$ttl ], [
 			'dir' => 'true',
 			'prevExist' => 'true',
 		] );
@@ -356,8 +356,8 @@ class Client implements ClientInterface {
 	/**
 	 * Removes the key if it is directory
 	 *
-	 * @param string  $key
-	 * @param boolean $recursive
+	 * @param string $key
+	 * @param bool $recursive
 	 * @return mixed
 	 * @throws EtcdException
 	 */
@@ -374,8 +374,8 @@ class Client implements ClientInterface {
 	/**
 	 * Retrieve a directory
 	 *
-	 * @param string  $key
-	 * @param boolean $recursive
+	 * @param string $key
+	 * @param bool $recursive
 	 * @return mixed
 	 * @throws KeyNotFoundException
 	 */
@@ -391,8 +391,8 @@ class Client implements ClientInterface {
 	/**
 	 * Retrieve a directories key
 	 *
-	 * @param string  $key
-	 * @param boolean $recursive
+	 * @param string $key
+	 * @param bool $recursive
 	 * @return array
 	 * @throws EtcdException
 	 */
@@ -447,9 +447,9 @@ class Client implements ClientInterface {
 	/**
 	 * Get all key-value pair that the key is not directory.
 	 *
-	 * @param string  $root
-	 * @param boolean $recursive
-	 * @param string  $key
+	 * @param string $root
+	 * @param bool $recursive
+	 * @param string $key
 	 * @return array
 	 */
 	public function getKeyValueMap( $root = '/', $recursive = true, $key = null ) {
@@ -462,7 +462,7 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	public function sandboxed( $sandbox_path, callable $callback ) {
 		$current_sandbox_path = $this->getSandboxPath();
@@ -475,7 +475,8 @@ class Client implements ClientInterface {
 			}
 		}
 
-		call_user_func_array( $callback, [ &$this ] );
+		$client = $this;
+		call_user_func_array( $callback, [ &$client ] );
 
 		if ( $sandbox_path != $current_sandbox_path ) {
 			$this->setSandboxPath( $current_sandbox_path );
@@ -483,7 +484,7 @@ class Client implements ClientInterface {
 	}
 
 	// ---------------------------------------------------
-	//  Make requests
+	// Make requests
 	// ---------------------------------------------------
 
 	/**

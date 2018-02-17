@@ -9,8 +9,7 @@ use ActiveCollab\Etcd\Exception\EtcdException;
 /**
  * @package ActiveCollab\Etcd\Tests\Etcd
  */
-class ClientTest extends \PHPUnit_Framework_TestCase
-{
+class ClientTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @var Client
 	 */
@@ -22,10 +21,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	private $dirname = '/phpunit_test';
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	protected function setUp() {
-
 		$this->client = new Client();
 
 		$this->client->setSandboxPath( '/' );
@@ -33,7 +31,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 		try {
 			$this->client->removeDir( $this->dirname, true );
 		} catch ( EtcdException $e ) {
-
 		}
 
 		$create_dir = $this->client->createDir( $this->dirname );
@@ -47,60 +44,51 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	protected function tearDown() {
-
 		try {
 			$this->client->removeDir( $this->dirname, true );
 		} catch ( EtcdException $e ) {
-
 		}
 	}
 
 	public function testExists() {
-
 		$this->assertFalse( $this->client->exists( '/testgetvalue' ) );
 		$this->client->set( '/testgetvalue', 'getvalue' );
 		$this->assertTrue( $this->client->exists( '/testgetvalue' ) );
 	}
 
 	public function testExistsOnlyChecksForValues() {
-
 		$this->assertFalse( $this->client->exists( '/testgetvalue' ) );
 		$this->client->createDir( '/testgetvalue' );
 		$this->assertFalse( $this->client->exists( '/testgetvalue' ) );
 	}
 
 	public function testDirExists() {
-
 		$this->assertFalse( $this->client->dirExists( '/testdir' ) );
 		$this->client->createDir( '/testdir' );
 		$this->assertTrue( $this->client->dirExists( '/testdir' ) );
 	}
 
 	public function testDirExistsChecksForDirs() {
-
 		$this->assertFalse( $this->client->dirExists( '/testdir' ) );
 		$this->client->set( '/testdir', 'getvalue' );
 		$this->assertFalse( $this->client->dirExists( '/testdir' ) );
 	}
 
 	public function testGet() {
-
 		$this->client->set( '/testgetvalue', 'getvalue' );
 		$value = $this->client->get( '/testgetvalue' );
 		$this->assertEquals( 'getvalue', $value );
 	}
 
 	public function testSet() {
-
 		$this->client->set( '/testset', 'setvalue' );
 		$this->assertEquals( 'setvalue', $this->client->get( '/testset' ) );
 	}
 
 	public function testSetWithTtl() {
-
 		$ttl = 10;
 
 		$this->client->set( 'testttl', 'ttlvalue', $ttl );
@@ -111,7 +99,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * @expectedException \ActiveCollab\Etcd\Exception\KeyExistsException
 	 */
 	public function testCreate() {
-
 		$this->client->create( 'testmk', 'mkvalue' );
 		$this->assertEquals( 'mkvalue', $this->client->get( 'testmk' ) );
 		$this->client->create( 'testmk', 'mkvalue' );
@@ -121,7 +108,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * @expectedException \ActiveCollab\Etcd\Exception\KeyExistsException
 	 */
 	public function testCreateDir() {
-
 		$this->client->createDir( 'testmkdir' );
 		$this->client->createDir( 'testmkdir' );
 	}
@@ -130,7 +116,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * @expectedException \ActiveCollab\Etcd\Exception\KeyNotFoundException
 	 */
 	public function testUpdate() {
-
 		$key = '/testupdate_key';
 		$value1 = 'value1';
 		$value2 = 'value2';
@@ -142,7 +127,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testUpdatedir() {
-
 		$dirname = '/test_updatedir';
 
 		$this->client->createDir( $dirname );
@@ -156,7 +140,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * @expectedException \ActiveCollab\Etcd\Exception\EtcdException
 	 */
 	public function testRemove() {
-
 		$this->client->remove( '/rmkey' );
 	}
 
@@ -164,14 +147,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * @expectedException \ActiveCollab\Etcd\Exception\EtcdException
 	 */
 	public function testRemoveDir() {
-
 		$this->client->createDir( 'testrmdir' );
 		$this->client->removeDir( 'testrmdir', true );
 		$this->client->removeDir( 'testrmdir' );
 	}
 
 	public function testListDir() {
-
 		$data = $this->client->dirInfo();
 
 		$this->assertEquals( $this->dirname, $data['node']['key'] );
@@ -179,13 +160,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testListSubdirs() {
-
 		$dirs = $this->client->listSubdirs();
 		$this->assertTrue( in_array( $this->dirname, $dirs ) );
 	}
 
 	public function testGetKeysValueMap() {
-
 		$this->client->set( '/a/aa', 'a_a' );
 		$this->client->set( '/a/ab', 'a_b' );
 		$this->client->set( '/a/b/ab', 'aa_b' );
@@ -200,7 +179,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testGetNode() {
-
 		$key = 'node_key';
 		$setdata = $this->client->set( $key, 'node_value' );
 		$node = $this->client->getNode( $key );
@@ -211,10 +189,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * Test sandboxed call with absolute path
 	 */
 	public function testSandboxedCall() {
-
 		$this->assertFalse( $this->client->exists( 'sub/value' ) );
 
-		$this->client->sandboxed( '/phpunit_test/sub', function( ClientInterface &$c ) {
+		$this->client->sandboxed( '/phpunit_test/sub', function ( ClientInterface &$c ) {
 			$c->set( 'value', 123 );
 		} );
 
@@ -226,10 +203,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	 * Test sandboxed call with relative path
 	 */
 	public function testRelativeSandboxedCall() {
-
 		$this->assertFalse( $this->client->exists( 'sub/value' ) );
 
-		$this->client->sandboxed( './sub', function( ClientInterface &$c ) {
+		$this->client->sandboxed( './sub', function ( ClientInterface &$c ) {
 			$c->set( 'value', 123 );
 		} );
 
