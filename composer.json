@@ -24,14 +24,19 @@
 	"require-dev" : {
 		"jakub-onderka/php-parallel-lint": "0.9.2",
 		"mediawiki/mediawiki-codesniffer": "16.0.0",
+		"mediawiki/minus-x": "0.3.1",
 		"phpunit/phpunit": "4.8.36"
 	},
 	"scripts": {
 		"test": [
 			"parallel-lint . --exclude vendor",
-			"phpcs -p -s"
+			"phpcs -p -s",
+			"minus-x check ."
 		],
-		"fix": "phpcbf"
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		]
 	},
 	"autoload": {
 		"psr-4": {
