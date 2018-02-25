@@ -1,13 +1,17 @@
 {
-	"name" : "wikimedia/etcd",
+	"name": "wikimedia/etcd",
 	"description": "PHP client for etcd, a distributed configuration system",
-	"license" : "GPL-2.0+",
-	"keywords": [ "etcd", "client", "configuration" ],
+	"license": "GPL-2.0+",
+	"keywords": [
+		"etcd",
+		"client",
+		"configuration"
+	],
 	"homepage": "https://www.mediawiki.org/wiki/etcd",
 	"authors": [
 		{
-			"name" : "Cong Peijun",
-			"email" : "p.cong@linkorb.com"
+			"name": "Cong Peijun",
+			"email": "p.cong@linkorb.com"
 		},
 		{
 			"name": "Ilija Studen",
@@ -17,14 +21,14 @@
 			"name": "Kunal Mehta"
 		}
 	],
-	"require" : {
+	"require": {
 		"php": ">=5.5.9",
-		"ext-curl" : "*"
+		"ext-curl": "*"
 	},
-	"require-dev" : {
+	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "0.9.2",
 		"jakub-onderka/php-console-highlighter": "0.3.2",
-		"mediawiki/mediawiki-codesniffer": "16.0.0",
+		"mediawiki/mediawiki-codesniffer": "16.0.1",
 		"mediawiki/minus-x": "0.3.1",
 		"phpunit/phpunit": "4.8.36"
 	},
