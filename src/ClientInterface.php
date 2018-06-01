@@ -114,7 +114,7 @@ interface ClientInterface {
 	 *
 	 * @param string $key
 	 * @param string $value
-	 * @param int $ttl
+	 * @param int|null $ttl
 	 * @param array $condition
 	 * @return array
 	 */
@@ -124,7 +124,7 @@ interface ClientInterface {
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array $flags
+	 * @param array|null $flags
 	 * @return array
 	 * @throws KeyNotFoundException
 	 * @throws EtcdException
@@ -135,7 +135,7 @@ interface ClientInterface {
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array $flags the extra query params
+	 * @param array|null $flags the extra query params
 	 * @return string the value of the key.
 	 * @throws KeyNotFoundException
 	 */
@@ -228,7 +228,7 @@ interface ClientInterface {
 	 *
 	 * @param string $root
 	 * @param bool $recursive
-	 * @param string $key
+	 * @param string|null $key
 	 * @return array
 	 */
 	public function getKeyValueMap( $root = '/', $recursive = true, $key = null );

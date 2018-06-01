@@ -234,7 +234,7 @@ class Client implements ClientInterface {
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array $flags the extra query params
+	 * @param array|null $flags the extra query params
 	 * @return array
 	 * @throws KeyNotFoundException
 	 * @throws EtcdException
@@ -258,7 +258,7 @@ class Client implements ClientInterface {
 	 * Retrieve the value of a key
 	 *
 	 * @param string $key
-	 * @param array $flags the extra query params
+	 * @param array|null $flags the extra query params
 	 * @return string the value of the key.
 	 * @throws KeyNotFoundException
 	 */
@@ -449,7 +449,7 @@ class Client implements ClientInterface {
 	 *
 	 * @param string $root
 	 * @param bool $recursive
-	 * @param string $key
+	 * @param string|null $key
 	 * @return array
 	 */
 	public function getKeyValueMap( $root = '/', $recursive = true, $key = null ) {
