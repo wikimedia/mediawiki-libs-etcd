@@ -23,7 +23,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->client = new Client();
 
 		$this->client->setSandboxPath( '/' );
@@ -46,7 +46,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function tearDown() {
+	protected function tearDown() : void {
 		try {
 			$this->client->removeDir( $this->dirname, true );
 		} catch ( EtcdException $e ) {
