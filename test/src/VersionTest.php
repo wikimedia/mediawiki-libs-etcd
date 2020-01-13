@@ -14,7 +14,7 @@ class VersionTest extends \PHPUnit\Framework\TestCase {
 	public function testGetVersion() {
 		$version = ( new Client() )->geVersion();
 
-		$this->assertInternalType( 'array', $version );
+		$this->assertIsArray( $version );
 		$this->assertArrayHasKey( 'etcdserver', $version );
 		$this->assertArrayHasKey( 'etcdcluster', $version );
 	}

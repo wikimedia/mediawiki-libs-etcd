@@ -35,9 +35,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 
 		$create_dir = $this->client->createDir( $this->dirname );
 
-		$this->assertInternalType( 'array', $create_dir );
+		$this->assertIsArray( $create_dir );
 		$this->assertEquals( 'create', $create_dir['action'] );
-		$this->assertInternalType( 'array', $create_dir['node'] );
+		$this->assertIsArray( $create_dir['node'] );
 		$this->assertTrue( $create_dir['node']['dir'] );
 
 		$this->client->setSandboxPath( $this->dirname );
@@ -196,7 +196,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 		} );
 
 		$this->assertTrue( $this->client->exists( 'sub/value' ) );
-		$this->assertEquals( '123', $this->client->get( 'sub/value' ) );
+		$this->assertSame( '123', $this->client->get( 'sub/value' ) );
 	}
 
 	/**
@@ -210,6 +210,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 		} );
 
 		$this->assertTrue( $this->client->exists( 'sub/value' ) );
-		$this->assertEquals( '123', $this->client->get( 'sub/value' ) );
+		$this->assertSame( '123', $this->client->get( 'sub/value' ) );
 	}
 }

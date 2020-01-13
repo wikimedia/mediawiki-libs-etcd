@@ -490,8 +490,8 @@ class Client implements ClientInterface {
 	/**
 	 * Make a GET request
 	 *
-	 * @param  string $url
-	 * @param  array  $query_arguments
+	 * @param string $url
+	 * @param array $query_arguments
 	 * @return array
 	 */
 	private function httpGet( $url, $query_arguments = [] ) {
@@ -505,9 +505,9 @@ class Client implements ClientInterface {
 	/**
 	 * Make a POST request
 	 *
-	 * @param  string        $url
-	 * @param  array         $payload
-	 * @param  array         $query_arguments
+	 * @param string $url
+	 * @param array $payload
+	 * @param array $query_arguments
 	 * @return array|mixed
 	 * @throws EtcdException
 	 */
@@ -528,9 +528,9 @@ class Client implements ClientInterface {
 	/**
 	 * Make a PUT request
 	 *
-	 * @param  string        $url
-	 * @param  array         $payload
-	 * @param  array         $query_arguments
+	 * @param string $url
+	 * @param array $payload
+	 * @param array $query_arguments
 	 * @return array|mixed
 	 * @throws EtcdException
 	 */
@@ -551,8 +551,8 @@ class Client implements ClientInterface {
 	/**
 	 * Make a DELETE request
 	 *
-	 * @param  string        $url
-	 * @param  array         $query_arguments
+	 * @param string $url
+	 * @param array $query_arguments
 	 * @return array|mixed
 	 * @throws EtcdException
 	 */
@@ -571,7 +571,7 @@ class Client implements ClientInterface {
 	/**
 	 * Initialize curl handle
 	 *
-	 * @param  string   $url
+	 * @param string $url
 	 * @return resource
 	 */
 	private function getCurlHandle( $url ) {
@@ -600,9 +600,9 @@ class Client implements ClientInterface {
 	}
 
 	/**
-	 * @param  resource      $curl
-	 * @param  string        $url
-	 * @param  bool|true     $decode_etcd_json
+	 * @param resource $curl
+	 * @param string $url
+	 * @param bool|true $decode_etcd_json
 	 * @return array|mixed
 	 * @throws EtcdException
 	 */
