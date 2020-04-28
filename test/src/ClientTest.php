@@ -95,30 +95,24 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 		$this->assertLessThanOrEqual( $ttl, $this->client->getNode( 'testttl' )['ttl'] );
 	}
 
-	/**
-	 * @expectedException \ActiveCollab\Etcd\Exception\KeyExistsException
-	 */
 	public function testCreate() {
 		$this->client->create( 'testmk', 'mkvalue' );
 		$this->assertEquals( 'mkvalue', $this->client->get( 'testmk' ) );
+		$this->expectException( \ActiveCollab\Etcd\Exception\KeyExistsException::class );
 		$this->client->create( 'testmk', 'mkvalue' );
 	}
 
-	/**
-	 * @expectedException \ActiveCollab\Etcd\Exception\KeyExistsException
-	 */
 	public function testCreateDir() {
 		$this->client->createDir( 'testmkdir' );
+		$this->expectException( \ActiveCollab\Etcd\Exception\KeyExistsException::class );
 		$this->client->createDir( 'testmkdir' );
 	}
 
-	/**
-	 * @expectedException \ActiveCollab\Etcd\Exception\KeyNotFoundException
-	 */
 	public function testUpdate() {
 		$key = '/testupdate_key';
 		$value1 = 'value1';
 		$value2 = 'value2';
+		$this->expectException( \ActiveCollab\Etcd\Exception\KeyNotFoundException::class );
 		$this->client->update( $key, $value1 );
 
 		$this->client->set( $key, $value2 );
@@ -136,19 +130,15 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 		$this->assertLessThanOrEqual( 10, $dir['node']['ttl'] );
 	}
 
-	/**
-	 * @expectedException \ActiveCollab\Etcd\Exception\EtcdException
-	 */
 	public function testRemove() {
+		$this->expectException( \ActiveCollab\Etcd\Exception\EtcdException::class );
 		$this->client->remove( '/rmkey' );
 	}
 
-	/**
-	 * @expectedException \ActiveCollab\Etcd\Exception\EtcdException
-	 */
 	public function testRemoveDir() {
 		$this->client->createDir( 'testrmdir' );
 		$this->client->removeDir( 'testrmdir', true );
+		$this->expectException( \ActiveCollab\Etcd\Exception\EtcdException::class );
 		$this->client->removeDir( 'testrmdir' );
 	}
 

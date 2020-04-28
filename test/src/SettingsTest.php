@@ -25,10 +25,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testSetInvalidServerUrlException() {
+		$this->expectException( \InvalidArgumentException::class );
 		new Client( 'invalid server url' );
 	}
 
@@ -52,10 +50,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( ( new Client() )->verifySslPeer( false )->getVerifySslPeer() );
 	}
 
-	/**
-	 * @expectedException \InvalidArgumentException
-	 */
 	public function testExceptionOnMissingCustomCaFile() {
+		$this->expectException( \InvalidArgumentException::class );
 		( new Client() )->verifySslPeer( true, 'not a file' );
 	}
 
@@ -69,10 +65,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	/**
-	 * @expectedException \LogicException
-	 */
 	public function testExceptionOnCustomCaFileWhenPeerIsNotVeified() {
+		$this->expectException( \LogicException::class );
 		( new Client() )->verifySslPeer( false, __FILE__ )->getCustomCaFile();
 	}
 
