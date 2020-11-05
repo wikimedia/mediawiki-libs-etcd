@@ -32,7 +32,7 @@ class Client implements ClientInterface {
 	private $root = '/';
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $verify_ssl_peer = true;
 
