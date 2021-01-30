@@ -151,7 +151,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 
 	public function testListSubdirs() {
 		$dirs = $this->client->listSubdirs();
-		$this->assertTrue( in_array( $this->dirname, $dirs ) );
+		$this->assertContains( $this->dirname, $dirs );
 	}
 
 	public function testGetKeysValueMap() {
@@ -165,7 +165,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 		$values = $this->client->getKeyValueMap();
 		$this->assertTrue( isset( $values[$this->dirname . '/a/aa'] ) );
 		$this->assertEquals( 'a_a', $values[$this->dirname . '/a/aa'] );
-		$this->assertTrue( in_array( 'aa_b', $values ) );
+		$this->assertContains( 'aa_b', $values );
 	}
 
 	public function testGetNode() {
