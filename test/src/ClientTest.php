@@ -181,7 +181,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 	public function testSandboxedCall() {
 		$this->assertFalse( $this->client->exists( 'sub/value' ) );
 
-		$this->client->sandboxed( '/phpunit_test/sub', function ( ClientInterface &$c ) {
+		$this->client->sandboxed( '/phpunit_test/sub', static function ( ClientInterface &$c ) {
 			$c->set( 'value', 123 );
 		} );
 
@@ -195,7 +195,7 @@ class ClientTest extends \PHPUnit\Framework\TestCase {
 	public function testRelativeSandboxedCall() {
 		$this->assertFalse( $this->client->exists( 'sub/value' ) );
 
-		$this->client->sandboxed( './sub', function ( ClientInterface &$c ) {
+		$this->client->sandboxed( './sub', static function ( ClientInterface &$c ) {
 			$c->set( 'value', 123 );
 		} );
 
